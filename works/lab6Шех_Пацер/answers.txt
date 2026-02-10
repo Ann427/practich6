@@ -1,0 +1,88 @@
+Часть 1.
+1. Команда: echo $$
+   Вывод: 3659
+2. Команда: ls -l /proc
+   Вывод: total 0
+dr-xr-xr-x  9 codespace codespace               0 Feb 10 11:53 1
+dr-xr-xr-x  9 root      root                    0 Feb 10 11:53 1002
+dr-xr-xr-x  9 codespace codespace               0 Feb 10 11:53 1019
+dr-xr-xr-x  9 root      root                    0 Feb 10 11:53 1048
+...
+3. Команда: cd /proc/$$
+            ls -la
+   Вывод: total 0
+dr-xr-xr-x   9 codespace codespace 0 Feb 10 11:54 .
+dr-xr-xr-x 234 root      root      0 Feb 10 11:53 ..
+-r--r--r--   1 codespace codespace 0 Feb 10 12:06 arch_status
+dr-xr-xr-x   2 codespace codespace 0 Feb 10 12:06 attr
+...
+4. Команда: ls -la /proc/$$/fd
+   Вывод: total 0
+dr-x------ 2 codespace codespace  6 Feb 10 11:54 .
+dr-xr-xr-x 9 codespace codespace  0 Feb 10 11:54 ..
+lrwx------ 1 codespace codespace 64 Feb 10 11:54 0 -> /dev/pts/0
+lrwx------ 1 codespace codespace 64 Feb 10 11:54 1 -> /dev/pts/0
+lrwx------ 1 codespace codespace 64 Feb 10 11:54 2 -> /dev/pts/0
+lrwx------ 1 codespace codespace 64 Feb 10 11:54 255 -> /dev/pts/0
+lrwx------ 1 codespace codespace 64 Feb 10 11:54 26 -> /dev/pts/ptmx
+l-wx------ 1 codespace codespace 64 Feb 10 11:54 6 -> /dev/null
+
+Ответ на вопрос из части 1: - fd 0 - стандартный вывод (stdin)
+                            - fd 1 - стандартный вывод (stdout)
+                            - fd 2 - стандартный вывод ошибок (stderr)
+                            Определение: по номерам дескрипторов (0,1,2) и по пути
+                            Зачем три первых дескриптора: чтобы разделить источники ввода, обычный вывод и вывод ошибок
+
+Часть 2.
+1. Команда: echo "Hello"
+   Вывод: Hello
+
+2. Команда: ls /none 2>&1
+   Вывод: ls: cannot access '/none': No such file or directory
+   
+3. Команда: ls /tmp /none > output.txt 2> error.txt
+   Вывод: bash: output.txt: No such file or directory
+
+4. Файл output.txt:
+      /tmp:
+      codespaces_logs
+      dockerd.log
+      sshd.log
+      storage_version.txt
+      system-commandline-sentinel-files
+      vscode-git-96b544ba37.sock
+      vscode-ipc-385548cd-99dc-451f-bd8e-9e1990641f20.sock
+      vscode-ipc-572da8f3-c9c6-474e-9f58-cdc187a7a724.sock
+   Файл error.txt:
+      ls: cannot access '/none': No such file or directory
+
+Ответ на вопрос из части 2: Потоки вывода и ошибок можно разделять, потому что они представляют
+собой разные дескрипторы (1 и 2).
+
+Часть 3.
+1. Создание файла file_demo.c
+   Команда запуска: gcc file_demo.c -o file_demo
+                    ./file_demo
+   Вывод: Все прошло успешно, вы справились!
+
+Ответ на вопрос из части 3: - rw -(6) для владельца - чтение и запись
+                            - r -(4) для группы - только чтение
+                            - r -(4) дл остальных - только чтение
+
+Часть 4.
+Команда: gcc main.c filelib.c -o app
+         cat log.txt
+Вывод: Start!
+       Succes
+
+Часть 5.
+Создание Makefile.
+Команда запуска: make
+Вывод в консоль: gcc -Wall -Wextra -std=c11 -c main.c
+                 gcc -Wall -Wextra -std=c11 -c filelib.c
+                 gcc -Wall -Wextra -std=c11 -o app main.o filelib.o
+
+Часть 6.
+Команда 1: ./app > out.txt
+Команда 2: ./app 2> err.txt
+Команда 3: ./app > out.txt 2> err.txt

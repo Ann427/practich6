@@ -1,0 +1,9 @@
+/tmp:
+codespaces_logs
+dockerd.log
+sshd.log
+storage_version.txt
+system-commandline-sentinel-files
+vscode-git-96b544ba37.sock
+vscode-ipc-385548cd-99dc-451f-bd8e-9e1990641f20.sock
+vscode-ipc-572da8f3-c9c6-474e-9f58-cdc187a7a724.sock
