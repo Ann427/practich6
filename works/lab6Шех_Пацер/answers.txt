@@ -86,3 +86,4 @@ l-wx------ 1 codespace codespace 64 Feb 10 11:54 6 -> /dev/null
 Команда 1: ./app > out.txt
 Команда 2: ./app 2> err.txt
 Команда 3: ./app > out.txt 2> err.txt
+Команда 4: ./app > all.txt 2>&1
